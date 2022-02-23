@@ -1,4 +1,4 @@
-from openpyxl import Workbook
+from xlwt import Workbook, Worksheet
 
 source = open("../res/sentences.txt", "r")
 result = open("../res/segmented.txt", "r")
@@ -9,11 +9,11 @@ punkt_sentences = result.read()
 source.close()
 result.close()
 
-wb = Workbook()
-ws = wb.active
-ws.cell(row=1, column=1, value='nomor')
-ws.cell(row=1, column=2, value='kalimat asli')
-ws.cell(row=1, column=3, value='hasil punkt')
+wb = Workbook(encoding="utf8")
+ws = wb.add_sheet("Sheet1")
+ws.write(0, 0, label='nomor')
+ws.write(0, 1, label='kalimat asli')
+ws.write(0, 2, label='hasil punkt')
 err_count = 0
 stc_start = 0
 stc_end = 0
@@ -24,9 +24,9 @@ for char in good_sentences:
 		punkt_stc = punkt_sentences[stc_start:stc_end]
 		if good_stc != punkt_stc:
 			err_count += 1
-			ws.cell(row=err_count+1, column=1, value=err_count)
-			ws.cell(row=err_count+1, column=2, value=good_stc.rstrip())
-			ws.cell(row=err_count+1, column=3, value=punkt_stc.rstrip())
+			ws.write(err_count, 0, label=err_count)
+			ws.write(err_count, 1, label=good_stc.rstrip())
+			ws.write(err_count, 2, label=punkt_stc.rstrip())
 		stc_start = stc_end
 
-wb.save('../res/punkt_error.xlsx')
+wb.save('../res/punkt_error.xls')
