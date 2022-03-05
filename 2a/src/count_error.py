@@ -1,13 +1,14 @@
 import xlwt
 
-source = open("../res/sentences.txt", "r")
-result = open("../res/segmented.txt", "r")
+source = open("../res/sentences.txt", "r", encoding="utf8")
+result = open("../res/segmented.txt", "r", encoding="utf8")
 
 good_sentences = source.read()
 if not good_sentences.endswith('\n'): good_sentences += '\n'
 punkt_sentences = result.read()
 
 if not len(good_sentences) == len(punkt_sentences):
+	print("source {0}, result {1}".format(len(good_sentences), len(punkt_sentences)))
 	raise Exception("Panjang karakter kedua file berbeda.")
 
 source.close()
@@ -29,7 +30,7 @@ stc_end = 0
 while stc_end != -1:
 	stc_end = good_sentences.find('\n', stc_start)
 	good_stc = good_sentences[stc_start : stc_end]
-	punkt_stc = punkt_sentences[punkt_sentences.rfind('\n', 0, stc_start)+1 : punkt_sentences.find('\n', stc_end)]
+	punkt_stc = punkt_sentences[punkt_sentences.rfind('\n', 0, stc_start)+1 : punkt_sentences.find('\n', stc_end-1)]
 
 	if good_stc != punkt_stc:
 		err_count += 1
