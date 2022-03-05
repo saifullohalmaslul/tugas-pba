@@ -1,13 +1,18 @@
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+import sys
+import time
 
+file = open(sys.argv[1], "r", encoding='utf8')
+sentence = file.read()
+file.close()
+
+ts = time.perf_counter()
 factory = StemmerFactory()
 stemmer = factory.create_stemmer()
-
-sentence = 'Perekonomian Indonesia sedang dalam pertumbuhan yang membanggakan'
 output = stemmer.stem(sentence)
+te = time.perf_counter()
+print(f"Finished in {te - ts:0.4f} seconds")
 
-print(output)
-# ekonomi indonesia sedang dalam tumbuh yang bangga
-
-print(stemmer.stem('Mereka meniru-nirukannya'))
-# mereka tiru
+out = open(sys.argv[1], "w", encoding='utf8')
+out.write(output)
+out.close()
