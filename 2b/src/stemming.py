@@ -13,6 +13,6 @@ output = stemmer.stem(sentence)
 te = time.perf_counter()
 print(f"Finished in {te - ts:0.4f} seconds")
 
-out = open(sys.argv[1], "w", encoding='utf8')
+out = open(sys.argv[1]+"_sp_out.txt", "w", encoding='utf8')
 out.write(output)
 out.close()

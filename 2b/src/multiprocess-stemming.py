@@ -3,12 +3,9 @@ from multiprocessing import Pool, cpu_count
 import sys
 import time
 
-factory = StemmerFactory()
-stemmer = factory.create_stemmer()
-
 def stemming(batch):
-	
-	# stemmer.cache = cache
+	factory = StemmerFactory()
+	stemmer = factory.create_stemmer()
 	print("starting process..")
 	ts = time.perf_counter()
 	result = stemmer.stem(batch)
@@ -33,8 +30,6 @@ if __name__ == '__main__':
 		batches.append(sentence[start:end])
 		start = end
 
-	# factory = StemmerFactory()
-	# stemmer = factory.create_stemmer()
 	with Pool(n_process) as pool:
 		output = pool.map(stemming, batches)
 
@@ -43,6 +38,6 @@ if __name__ == '__main__':
 	te = time.perf_counter()
 	print(f"Finished in {te - ts:0.4f} seconds")
 
-	out = open("../res/out.txt", "w", encoding='utf8')
+	out = open(sys.argv[1]+"_mp_out.txt", "w", encoding='utf8')
 	out.write(output)
 	out.close()
