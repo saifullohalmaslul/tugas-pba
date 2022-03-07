@@ -2,6 +2,7 @@
 
 ## What's this
 2a adalah program yang akan melakukan proses segmentasi kalimat, dan juga membuat sebuah file excel yang akan memberitahu pengguna tentang total kesalahan segmentasi.
+
 2b adalah program yang akan melakukan *stemming*, sebuah proses dimana kata pada setiap line akan dideteksi dan dirubah menjadi kata dasar (jika kata tersebut belum dasar).
 
 ## How to use
@@ -10,6 +11,7 @@ Pada folder src, jalankan `seg_punkt.py` terlebih dahulu, ini akan membuat file 
 #### Dependency
 - NLTK
 - xlwt
+
 `pip install NLTK xlwt`
 
 ### 2b
@@ -23,4 +25,5 @@ Untuk mempermudah, masukan file text dalam folder yang sama.
 
 #### Dependency
 - Sastrawi
+
 `pip install Sastrawi`
